@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Lista de Imágenes</title>
+    <style>
+        body {
+            margin: 20px; /* Márgenes alrededor del cuerpo de la página */
+        }
+
+        .image-container {
+            margin-left: 20px; /* Espacio a la izquierda de cada grupo de imagen-descripción */
+            margin-bottom: 20px; /* Espacio debajo de cada grupo de imagen-descripción */
+        }
+
+        .image-title {
+            font-weight: bold;
+            color: #333; /* Letras más oscuras para el título */
+            margin-bottom: 10px; /* Espacio debajo del título */
+        }
+
+        .image-description-table {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .image-description-table td {
+            padding: 5px;
+            border-bottom: 1px solid #ddd; /* Línea divisoria entre las descripciones */
+        }
+
+        .image-description-table td:first-child {
+            width: 120px; /* Ancho de la primera columna (nombre) */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="mb-4">Galería de Imágenes</h1>
+    <div class="d-flex flex-wrap">
+        {% for imagen in imagenes %}
+            <div class="image-container mb-4">
+                <p class="image-title">{{ imagen.nombre }}</p>
+                <img src="{{ imagen.archivo.url }}" alt="{{ imagen.nombre }}" class="img-fluid" width="300">
+                <table class="image-description-table">
+                    <tr>
+                        
+                        <td>{{ imagen.descripcion }}</td>
+                    </tr>
+                </table>
+                <a href="{% url 'eliminar_imagen' imagen.id %}">Eliminar imagen</a>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'cargar_imagen' %}" class="btn btn-primary">Cargar Nueva Imagen</a>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>
